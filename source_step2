@@ -1,0 +1,24 @@
+echo "========================== Download TCGA data using gdc-client and filtered metadata files =========================="
+
+#Download gdc-client
+#wget http://gdc.cancer.gov/files/public/file/gdc-client_v1.3.0_Ubuntu14.04_x64.zip
+
+#Unzip it and the application is ready to be used
+unzip gdc-client_v1.3.0_Ubuntu14.04_x64.zip
+
+#Create directories to store downloaded data
+mkdir ./downloads/clinical
+mkdir ./downloads/fpkm
+mkdir ./clinical
+mkdir ./fpkm
+
+#Download clinical and FPKM data
+./gdc-client download -m filtered_clinical_manifest.txt -d ./downloads/clinical
+./gdc-client download -m filtered_fpkm_manifest.txt -d ./downloads/fpkm
+
+#Extract zipped files and put them into a single folder
+find ./downloads/clinical -name '*.xml' | xargs cp -t ./clinical
+find ./downloads/fpkm -name '*.FPKM.txt.gz' | xargs cp -t ./fpkm
+
+#Extract all FPKM files
+gunzip ./fpkm/*.gz

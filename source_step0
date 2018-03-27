@@ -1,0 +1,29 @@
+echo " "
+echo "============================= Download expression data from TCGA ============================="
+echo " "
+echo "1. Select \"TCGA-GBM(Brain)\" at https://portal.gdc.cancer.gov/"
+echo "2. Select cases of "Transcriptome Profiling" at https://portal.gdc.cancer.gov/projects/TCGA-GBM"
+echo "3. On filters, go to tab \"Files\" and select Workflow Type \"HTSeq - FPKM\""
+echo "   *At this step, we have 174 FPKM files."
+echo "4. On filters, go to tab \"Cases\" and click on \"Add a Case/Biospecimen Filter\""
+echo "	4.1. Add filter \"samples.sample_type\" and then filter by \"Primary Tumor\""
+echo "	*At this step, we have 156 FPKM files"
+echo "5. On table (tab \"Files\"), go to \"Export table\" and download metadata JSON file(fpkm_metadata.json)"
+echo "6. Then, add all files to the cart. Enter your cart and select \"Download\" -> \"Manifest\" (fpkm_manifest.txt)"
+echo " "
+echo "============================= Download clinical data from TCGA ============================="
+echo " "
+echo "1. Select \"TCGA-GBM(Brain)\" at https://portal.gdc.cancer.gov/"
+echo "2. Select cases of \"Clinical\" at https://portal.gdc.cancer.gov/projects/TCGA-GBM"
+echo "3. On filters, go to tab \"Cases\" and remove entries with Vital Status \"not reported\""
+echo "   *At this step, we have 594 clinical files"
+echo "4. On table (tab \"Files\"), go to \"Export table\" and download metadata JSON file (clinical_metadata.json)"
+echo "5. Then, add all files to the cart (do not forget to remove the previous added files). Enter your cart and select \"Download\" -> \"Manifest\" (clinical_manifest.txt)"
+echo " "
+
+#Create directories to store downloaded data
+mkdir downloads
+
+#Create directories to store some intermediate results
+mkdir ./subsamples
+mkdir ./subsamples/results

@@ -1,0 +1,6 @@
+#Select all known lncRNAs from Gencode file
+awk '{if($3=="gene")print$10}' gencode.v26.long_noncoding_RNAs.gtf | awk -F ";" '{print$1}' | sed s/\"//g | sed 's/\..*$//' > lncRNAs_list.txt
+
+#Create map between gene.id and gene.symbol
+awk '{if($3=="gene")print$10 "\t" $14}' gencode.v26.long_noncoding_RNAs.gtf | sed s/\"//g | sed s/\;//g | awk '{sub(/\..*$/,"",$1); print$1"\t"$2}' > map_ids_lncRNAs.txt
+
